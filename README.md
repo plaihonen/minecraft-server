@@ -1,14 +1,34 @@
 # minecraft-server
 Minecraft server on Google Container Engine
 
+### Tools needed
+* [Gcloud SDK](https://cloud.google.com/sdk/downloads)
+* [Kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 
 ### Create disk for persistent data
 
-Possible variables:<br>
+** Possible variables:** <br>
 PERSISTENT_STORAGE="mc-disk"<br>
 MSC_CLUSTER_NAME="mc-cluster"<br>
 ZONE="europe-west1-b"<br>
 MACHINE_TYPE="n1-standard-1"<br>
+
+### Create container cluster and service
+```bash
+./create-mc-server-environment.sh
+```
+
+### Expose the IP address
+```bash
+kubectl expose deployment mc-server --type="LoadBalancer"
+
+```
+
+### Reference
+
+If there is a need for (non-beta) persistent disk
+
+[https://cloud.google.com/container-engine/docs/tutorials/persistent-disk](https://cloud.google.com/container-engine/docs/tutorials/persistent-disk)
 
 ```bash
 gcloud compute disks create --size 200GB ${PERSISTENT_STORAGE}
@@ -23,25 +43,6 @@ can be used. You can find instructions on how to do this at:
 
 [https://cloud.google.com/compute/docs/disks/add-persistent-disk#formatting](https://cloud.google.com/compute/docs/disks/add-persistent-disk#formatting)
 
-### Create container cluster
-```bash
-gcloud container clusters create ${MSC_CLUSTER_NAME} \
-  --zone ${ZONE} \
-  --machine-type ${MACHINE_TYPE} \
-  --num-nodes 1 \
-  --enable-autoscaling \
-  --min-nodes 1 \
-  --max-nodes 2
-Creating cluster ${MSC_CLUSTER_NAME}...done.
-Created [https://container.googleapis.com/v1/projects/minecraft-server-185418/zones/${ZONE}/clusters/${MSC_CLUSTER_NAME}].
-kubeconfig entry generated for ${MSC_CLUSTER_NAME}.
-NAME            ZONE            MASTER_VERSION  MASTER_IP      MACHINE_TYPE   NODE_VERSION  NUM_NODES  STATUS
-${MSC_CLUSTER_NAME}  ${ZONE}  1.7.8-gke.0     11.222.111.33  ${MACHINE_TYPE}  1.7.8-gke.0   1          RUNNING
-```
-
-
-### Reference
-[https://cloud.google.com/container-engine/docs/tutorials/persistent-disk](https://cloud.google.com/container-engine/docs/tutorials/persistent-disk)
 
 ```bash
 # Riff Raff
@@ -49,6 +50,7 @@ gcloud container clusters create example-cluster
 kubectl run hello-web --image=gcr.io/google-samples/hello-app:1.0 --port=8080
 kubectl expose deployment hello-web --type="LoadBalancer"
 kubectl get service hello-web
+kubectl describe pods hello-web
 kubectl delete service hello-web
 gcloud container clusters delete example-cluster
  ```
