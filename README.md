@@ -7,7 +7,7 @@ Minecraft server on Google Container Engine
 
 ### Create disk for persistent data
 
-** Possible variables:** <br>
+**Possible variables:** <br>
 PERSISTENT_STORAGE="mc-disk"<br>
 MSC_CLUSTER_NAME="mc-cluster"<br>
 ZONE="europe-west1-b"<br>
