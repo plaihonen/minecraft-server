@@ -22,9 +22,11 @@ MACHINE_TYPE="n1-standard-1"<br>
 ```bash
 kubectl expose deployment mc-server --type="LoadBalancer"
 
+# Check the values
+kubectl get services mc-server
 ```
 
-### Reference
+### Misc
 
 If there is a need for (non-beta) persistent disk
 
@@ -54,3 +56,10 @@ kubectl describe pods hello-web
 kubectl delete service hello-web
 gcloud container clusters delete example-cluster
  ```
+
+#### Commands
+```bash
+kubectl cluster-info
+kubectl get nodes
+
+```

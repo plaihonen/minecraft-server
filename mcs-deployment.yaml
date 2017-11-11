@@ -1,0 +1,75 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: minecraft-service
+spec:
+  ports:
+  - port: 25565
+  selector:
+    app: minecraft-service
+  clusterIP: None
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mcs-pv-claim
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 50Gi
+---
+apiVersion: apps/v1beta2 # for versions before 1.8.0 use apps/v1beta1
+kind: Deployment
+metadata:
+  name: mc-server
+spec:
+  selector:
+    matchLabels:
+      app: mc-server
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: mc-server
+    spec:
+      containers:
+      - image: ${IMAGE}
+        name: mc-server
+        env:
+          - name: EULA
+            value: "TRUE"
+          - name: WHITELIST
+            value: "${WHITELIST}"
+          - name: OPS
+            value: "${OPS}"
+          - name: TYPE
+            value: "FORGE"
+          - name: ALLOW_NETHER
+            value: "true"
+          - name: ANNOUNCE_PLAYER_ACHIEVEMENTS
+            value: "true"
+          - name: ENABLE_COMMAND_BLOCK
+            value: "true"
+          - name: GENERATE_STRUCTURES
+            value: "true"
+          - name: SPAWN_ANIMALS
+            value: "true"
+          - name: SPAWN_MONSTERS
+            value: "true"
+          - name: SPAWN_NPCS
+            value: "true"
+          - name: MOTD
+            value: "${MOTD}"
+        ports:
+        - containerPort: 25565
+          name: mc-server
+        volumeMounts:
+        - name: mcs-persistent-storage
+          mountPath: /data
+      volumes:
+      - name: mcs-persistent-storage
+        persistentVolumeClaim:
+          claimName: mcs-pv-claim
