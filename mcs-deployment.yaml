@@ -9,7 +9,6 @@ spec:
     targetPort: 25565
   selector:
     app: mc-server
-  clusterIP: None
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
