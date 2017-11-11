@@ -1,6 +1,27 @@
 # minecraft-server
 Minecraft server on Google Container Engine
 
+### Comments
+
+While containers can be launched with persistent disk, how does noe access that disk?
+How does one access the container gcloud exec? kubectl exec?
+
+$ gcloud config configurations activate minecraft
+
+```shell
+# apiVersion: v1
+# kind: PersistentVolumeClaim
+# metadata:
+#   name: mcs-pv-claim
+# spec:
+#   accessModes:
+#     - ReadWriteOnce <----????
+#   resources:
+#     requests:
+#       storage: 50G
+```
+
+
 ### Tools needed
 * [Gcloud SDK](https://cloud.google.com/sdk/downloads)
 * [Kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)

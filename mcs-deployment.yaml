@@ -3,10 +3,13 @@ kind: Service
 metadata:
   name: minecraft-service
 spec:
+  type: LoadBalancer
   ports:
   - port: 25565
+    targetPort: 25565
+    protocol: TCP
   selector:
-    app: minecraft-service
+    app: mc-server
   clusterIP: None
 ---
 apiVersion: v1
@@ -15,7 +18,7 @@ metadata:
   name: mcs-pv-claim
 spec:
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   resources:
     requests:
       storage: 50Gi
