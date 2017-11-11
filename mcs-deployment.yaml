@@ -7,7 +7,6 @@ spec:
   ports:
   - port: 25565
     targetPort: 25565
-    protocol: TCP
   selector:
     app: mc-server
   clusterIP: None
