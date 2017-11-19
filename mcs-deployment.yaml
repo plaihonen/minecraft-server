@@ -38,7 +38,7 @@ spec:
         app: mc-server
     spec:
       containers:
-      - image: eu.gcr.io/minecraft-server-185418/minecraft-server
+      - image: ${IMAGE}
         name: mc-server
         env:
           - name: EULA
