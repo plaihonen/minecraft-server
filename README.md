@@ -15,22 +15,8 @@ Minecraft server on Google Container Engine
 
 
 ### Setting up
-Please edit the Variables for cluster and container to your own
 
-**Possible variables:** <br>
-PERSISTENT_STORAGE="mc-disk"<br>
-MSC_CLUSTER_NAME="mc-cluster"<br>
-ZONE="europe-west1-b"<br>
-MACHINE_TYPE="n1-standard-1"<br>
-
-**Possible variables for the container**
-IMAGE="<address-to-your-container-images>"<br>
-MOTD="Message of the day"<br>
-WHITELIST="user1,user2,user3"<br>
-OPS="user1"<br>
-
-
-### Create container cluster and service
+#### Create container cluster and service
 You either want to set up your Google Container Engine to either [mirror the official Docker hub](https://cloud.google.com/container-registry/docs/using-dockerhub-mirroring), or you can pull the image first to your local system, and then push it to the GCE registry.
 
 **Pulling the image, and then pushing into the GCE registry**
@@ -54,11 +40,24 @@ gcloud docker -- push eu.gcr.io/minecraft-server-35678/minecraft-server
 
 **Please make sure your IMAGE variable has the value of the TAG you set and pushed above**
 
+Edit the Variables for cluster and container to your own
+
+**Possible variables:** <br>
+PERSISTENT_STORAGE="mc-disk"<br>
+MSC_CLUSTER_NAME="mc-cluster"<br>
+ZONE="europe-west1-b"<br>
+MACHINE_TYPE="n1-standard-1"<br>
+
+**Possible variables for the container:**"<br>
+IMAGE="address-to-your-container-images"<br>
+MOTD="Message of the day"<br>
+WHITELIST="user1,user2,user3"<br>
+OPS="user1"<br>
+
 Now you can run the provided script
 ```bash
 ./create-mc-server-environment.sh
 ```
-
 
 ### Misc
 If there is a need for (non-beta) persistent disk
