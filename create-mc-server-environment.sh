@@ -56,7 +56,7 @@ echo "If something goes wrong, delete created resources by running:"
 echo "kubectl delete -f mcs-deployment.yaml"
 echo
 echo "Or you can delete the entire cluster:"
-echo "gcloud container clusters delete mc-cluster --zone ${ZONE} --quiet"
+echo "gcloud container clusters delete ${MSC_CLUSTER_NAME} --zone ${ZONE} --quiet"
 echo
 echo "If you are not planning of running the MC server for a while, delete IP address as well:"
 echo "gcloud compute addresses delete minecraft-ip --region ${REGION} --quiet"

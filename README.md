@@ -48,7 +48,7 @@ MSC_CLUSTER_NAME="mc-cluster"<br>
 ZONE="europe-west1-b"<br>
 MACHINE_TYPE="n1-standard-1"<br>
 
-**Possible variables for the container:**"<br>
+**Possible variables for the container:** <br>
 IMAGE="address-to-your-container-images"<br>
 MOTD="Message of the day"<br>
 WHITELIST="user1,user2,user3"<br>
@@ -57,6 +57,25 @@ OPS="user1"<br>
 Now you can run the provided script
 ```bash
 ./create-mc-server-environment.sh
+```
+
+### Remove deployment and the cluster
+Sometimes things go south and errors happen.<br>
+These commands allow you to smoothly start over.
+
+**Delete the deployment**
+```bash
+kubectl delete -f mcs-deployment.yaml
+```
+
+**Delete the entire cluster**
+```bash
+gcloud container clusters delete ${MSC_CLUSTER_NAME} --zone ${ZONE} --quiet"
+```
+
+**If you are not planning of running the MC server for a while, delete IP address as well<br>
+```bash
+gcloud compute addresses delete minecraft-ip --region ${REGION} --quiet
 ```
 
 ### Misc
