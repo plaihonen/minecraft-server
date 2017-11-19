@@ -78,6 +78,20 @@ gcloud container clusters delete ${MSC_CLUSTER_NAME} --zone ${ZONE} --quiet
 gcloud compute addresses delete minecraft-ip --region ${REGION} --quiet
 ```
 
+### Connecting to the running container
+If and when you need to connect to your running container for whatever reason. This is how you can do it.
+
+```bash
+# Get container name
+kubectl get pods -o json | jq -r .items[].metadata.name
+# Connect to it via normal docker-like method
+kubectl exec -it CONTAINER_NAME bash
+# or providing both commands in one-liner
+kubectl exec -it $(kubectl get pods -o json | jq -r .items[].metadata.name) bash
+# The latter command will not work if you have more than one container
+```
+
+
 ### Misc
 If there is a need for (non-beta) persistent disk
 
@@ -95,7 +109,6 @@ New disks are unformatted. You must format and mount a disk before it<br>
 can be used. You can find instructions on how to do this at:
 
 [https://cloud.google.com/compute/docs/disks/add-persistent-disk#formatting](https://cloud.google.com/compute/docs/disks/add-persistent-disk#formatting)
-
 
 
 ### Commands

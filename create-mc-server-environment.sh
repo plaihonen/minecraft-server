@@ -77,5 +77,5 @@ echo "In order to get the container name only. Issue the command:"
 echo "kubectl get pods -o json | jq -r .items[].metadata.name"
 echo
 echo "Then you can connect to the container via:"
-echo "kubectl exec -it SERVER_NAME bash"
+echo "kubectl exec -it $(kubectl get pods -o json | jq -r .items[].metadata.name) bash"
 echo
