@@ -4,6 +4,7 @@ metadata:
   name: minecraft-service
 spec:
   type: LoadBalancer
+  loadBalancerIP: "${MC_IP_ADDRESS}"
   ports:
   - port: 25565
     targetPort: 25565
@@ -16,7 +17,7 @@ metadata:
   name: mcs-pv-claim
 spec:
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   resources:
     requests:
       storage: 50Gi
@@ -37,7 +38,7 @@ spec:
         app: mc-server
     spec:
       containers:
-      - image: ${IMAGE}
+      - image: eu.gcr.io/minecraft-server-185418/minecraft-server
         name: mc-server
         env:
           - name: EULA

@@ -84,3 +84,22 @@ kubectl cluster-info
 kubectl get nodes
 
 ```
+
+#### Running locally
+```bash
+docker run -d -p 25565:25565 \
+  --name mc \
+  -e EULA=TRUE \
+  -e TYPE=FORGE \
+  -e WHITELIST="SakuTheFinn,Pietu" \
+  -e OPS="SakuTheFinn,Pietu" \
+  -e ALLOW_NETHER=true \
+  -e ANNOUNCE_PLAYER_ACHIEVEMENTS=true \
+  -e ENABLE_COMMAND_BLOCK=true \
+  -e GENERATE_STRUCTURES=true \
+  -e SPAWN_ANIMALS=true \
+  -e SPAWN_MONSTERS=true \
+  -e SPAWN_NPCS=true \
+  -e MOTD="Saku's minemylly" \
+  itzg/minecraft-server
+```
