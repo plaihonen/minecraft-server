@@ -122,6 +122,13 @@ kubectl get pods -o wide
 kubectl get pods -o json | jq -r .items[].metadata.name
 ```
 
+```bash
+# List disk allocation in your container
+kubectl exec -it $(kubectl get pods -o json | jq -r .items[].metadata.name) -- bash -c "df -h"
+# File listing in your container
+kubectl exec -it $(kubectl get pods -o json | jq -r .items[].metadata.name) -- bash -c "ls -la"
+```
+
 ### Running locally
 ```bash
 export PERSISTENT_STORAGE="mc-disk"<br>
