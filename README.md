@@ -70,10 +70,10 @@ kubectl delete -f mcs-deployment.yaml
 
 **Delete the entire cluster**
 ```bash
-gcloud container clusters delete ${MSC_CLUSTER_NAME} --zone ${ZONE} --quiet"
+gcloud container clusters delete ${MSC_CLUSTER_NAME} --zone ${ZONE} --quiet
 ```
 
-**If you are not planning of running the MC server for a while, delete IP address as well<br>
+**If you are not planning of running the MC server for a while, delete IP address as well** <br>
 ```bash
 gcloud compute addresses delete minecraft-ip --region ${REGION} --quiet
 ```
