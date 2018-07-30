@@ -37,6 +37,8 @@ spec:
       labels:
         app: mc-server
     spec:
+      securityContext:
+        fsGroup: 1000
       containers:
       - image: ${IMAGE}
         name: mc-server
