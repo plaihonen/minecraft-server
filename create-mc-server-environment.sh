@@ -13,7 +13,7 @@ REGION="europe-west1"
 ZONE="europe-west1-b"
 NODES="2"
 MSC_CLUSTER_NAME="mc-cluster-name"
-KUBERNETES_VERSION="1.8.2-gke.0"
+KUBERNETES_VERSION="1.10.7-gke.6"
 MACHINE_TYPE="n1-standard-1"
 PERSISTENT_STORAGE="mc-disk-name"
 
