@@ -130,32 +130,24 @@ kubectl exec -it $(kubectl get pods -o json | jq -r .items[].metadata.name) -- b
 ```
 
 ### Running locally
+
+We use [docker-compose](https://docs.docker.com/compose/overview/) to run the server locally. Install by running `pip install docker-compose`.
+
+First you want to rename the `env_template` to `.env`, and edit the variables within accordingly.
 ```bash
-export PERSISTENT_STORAGE="mc-disk"<br>
-export MSC_CLUSTER_NAME="mc-cluster"<br>
-export ZONE="europe-west1-b"<br>
-export MACHINE_TYPE="n1-standard-1"<br>
+# To start the service
+docker-compose up -d
 
-export IMAGE="<address-to-your-container-images>"<br>
-export MOTD="Message of the day"<br>
-export WHITELIST="user1,user2,user3"<br>
-export OPS="user1"<br>
+# To review the logs
+docker-compose logs -f
 
-docker run -d -p 25565:25565 \
-  --name mc \
-  -e EULA=TRUE \
-  -e TYPE=FORGE \
-  -e WHITELIST="${WHITELIST}" \
-  -e OPS="${WHITELIST}" \
-  -e ALLOW_NETHER=true \
-  -e ANNOUNCE_PLAYER_ACHIEVEMENTS=true \
-  -e ENABLE_COMMAND_BLOCK=true \
-  -e GENERATE_STRUCTURES=true \
-  -e SPAWN_ANIMALS=true \
-  -e SPAWN_MONSTERS=true \
-  -e SPAWN_NPCS=true \
-  -e MOTD="${MOTD}" \
-  itzg/minecraft-server
+# To shut down
+docker-compose down
+```
+
+Clean up the volumes if you don't want to save the existing server data.
+```bash
+docker volume prune
 ```
 
 

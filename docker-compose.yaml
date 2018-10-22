@@ -1,0 +1,43 @@
+version: '3.7'
+
+services:
+  mc-server:
+    image: ${IMAGE}
+    container_name: mc-server
+    restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 4G
+        reservations:
+          cpus: '0.10'
+          memory: 2G
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "20k"
+        max-file: "10"
+    ports:
+      - "25565:25565"
+    environment:
+      - EULA
+      - TYPE
+      - ALLOW_NETHER
+      - ANNOUNCE_PLAYER_ACHIEVEMENTS
+      - ENABLE_COMMAND_BLOCK
+      - GENERATE_STRUCTURES
+      - SPAWN_ANIMALS
+      - SPAWN_MONSTERS
+      - SPAWN_NPCS
+      - WHITELIST
+      - OPS
+      - MOTD
+    volumes:
+      - type: volume
+        source: mc-data
+        target: /data
+
+volumes:
+  mc-data:
+    driver: local
