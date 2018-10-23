@@ -1,3 +1,7 @@
+#
+# More env options at:
+# https://github.com/itzg/dockerfiles/tree/master/minecraft-server
+# 
 COMPOSE_PROJECT_NAME=minecraft-server
 WHITELIST=User1,User2
 OPS=User1,User2
@@ -12,3 +16,6 @@ GENERATE_STRUCTURES=true
 SPAWN_ANIMALS=true
 SPAWN_MONSTERS=true
 SPAWN_NPCS=true
+
+# If using local folder for persistent data
+LOCAL_MC_DATA=./mc_data

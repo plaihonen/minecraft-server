@@ -1,3 +1,7 @@
+#
+# https://github.com/itzg/dockerfiles/tree/master/minecraft-server
+# 
+
 version: '3.7'
 
 services:
@@ -5,14 +9,8 @@ services:
     image: ${IMAGE}
     container_name: mc-server
     restart: always
-    deploy:
-      resources:
-        limits:
-          cpus: '0.50'
-          memory: 4G
-        reservations:
-          cpus: '0.10'
-          memory: 2G
+    tty: true
+    stdin_open: true
     logging:
       driver: "json-file"
       options:
@@ -31,13 +29,17 @@ services:
       - SPAWN_MONSTERS
       - SPAWN_NPCS
       - WHITELIST
+      - ENABLE_QUERY
       - OPS
       - MOTD
     volumes:
-      - type: volume
-        source: mc-data
+      - type: bind
+        source: ${LOCAL_MC_DATA}
         target: /data
+      # - type: volume
+      #   source: mc-data
+      #   target: /data
 
-volumes:
-  mc-data:
-    driver: local
+# volumes:
+#   mc-data:
+#     driver: local
