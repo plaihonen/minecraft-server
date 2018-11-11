@@ -1,4 +1,4 @@
 real-responses.txt
 create-mc-server-local.sh
-mc_data
+mc_data*
 .env
